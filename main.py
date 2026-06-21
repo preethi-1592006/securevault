@@ -185,6 +185,41 @@ def delete_vault(vault_id: int):
 
 # ---------------- DATABASE INIT ----------------
 Base.metadata.create_all(bind=engine) 
+@app.get("/vault/{id}")
+def get_vault(id: int, token: str = Depends(oauth2_scheme)):
+    db = SessionLocal()
+
+    vault = db.query(Vault).filter(Vault.id == id).first()
+
+    if not vault:
+        db.close()
+        return {"message": "Vault entry not found"}
+
+    db.close()
+    return vault
+@app.put("/vault/{id}")
+def update_vault(id: int, entry: VaultEntry, token: str = Depends(oauth2_scheme)):
+    db = SessionLocal()
+
+    vault = db.query(Vault).filter(Vault.id == id).first()
+
+    if not vault:
+        db.close()
+        return {"message": "Vault entry not found"}
+
+    vault.website = entry.website
+    vault.username = entry.username
+    vault.password = encrypt(entry.password)
+
+    db.commit()
+    db.refresh(vault)
+
+    db.close()
+
+    return {
+        "message": "Vault updated successfully"
+    } 
+
 
 
 
