@@ -5,13 +5,16 @@ class RegisterUser(BaseModel):
     email: str
     password: str
 
-
 class LoginUser(BaseModel):
-    email: str
+    email: str  
     password: str
 
+class VaultSchema(BaseModel):
+    website: str
+    username: str
+    password: str
 
 class VaultEntry(BaseModel):
     website: str
     username: str
-    password: str  
+    password: str 

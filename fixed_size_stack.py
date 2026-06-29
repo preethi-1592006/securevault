@@ -19,5 +19,5 @@ class FixedSizeStack:
         return self.stack[-1]
 
     def get_all(self):
-        return self.stack 
+        return self.stack  
     

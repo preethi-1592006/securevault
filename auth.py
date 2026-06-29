@@ -41,4 +41,4 @@ def encrypt(text: str):
     return fernet.encrypt(text.encode()).decode()
 
 def decrypt(text: str):
-    return fernet.decrypt(text.encode()).decode()  
+    return fernet.decrypt(text.encode()).decode()   

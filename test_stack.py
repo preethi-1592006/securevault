@@ -8,3 +8,4 @@ stack.push("C")
 stack.push("D")
 
 print(stack.get_all()) 
+ 
